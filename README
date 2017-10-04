@@ -1,5 +1,4 @@
 A python script to rip raw images off slideshare.net
-Requires python2 and BeautifulSoup
+Depends on python2, BeautifulSoup4, and curl
 
 Usage: slideShareRipper.py <url>
-

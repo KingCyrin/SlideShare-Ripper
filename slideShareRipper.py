@@ -5,20 +5,25 @@ import sys
 import urllib2
 from bs4 import BeautifulSoup
 
-if sys.argc != 2:
-	print("Usage : slideShareRipper.py <url>")
+if len(sys.argv) != 2:
+	print("Usage: slideShareRipper.py <url>")
 	exit()
 
-slide_share = sys.argv[1]
-page = urllib2.urlopen(slide_share)
+url = sys.argv[1]
+page = urllib2.urlopen(url)
 soup = BeautifulSoup(page, 'html.parser')
+
+title_dir = str( soup.find("span", class_="j-title-breadcrumb").string ).rstrip()[-38:] + "/"
+os.mkdir(title_dir)
+
 slide_share_array = soup.find_all("img", class_="slide_image")
 count = 0
 
 for link in slide_share_array:
 	count += 1
-	_cmd_ = "curl " + link.get("data-full") + " -o \"slide-number-" + str(count) + "\""
-	os.system( _cmd_ )
+	_cmd_ = 'curl ' + link.get('data-full') + ' -o "./' + title_dir + 'slide-' + str(count) + '.jpg"'
 
-	print( link.get("data-full") )
+	os.system( _cmd_ )
+	
 	print( _cmd_ )
+
