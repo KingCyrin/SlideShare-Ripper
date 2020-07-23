@@ -22,8 +22,6 @@ count = 0
 for link in slide_share_array:
 	count += 1
 	_cmd_ = 'curl ' + link.get('data-full') + ' -o "./' + title_dir + 'slide-' + str(count) + '.jpg"'
-
 	os.system( _cmd_ )
-	
 	print( _cmd_ )
 
